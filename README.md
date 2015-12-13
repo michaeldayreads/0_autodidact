@@ -1,5 +1,4 @@
-Teaching myself to code
-=======================
+## Teaching myself to code
 
 Why on git?
 -----------
