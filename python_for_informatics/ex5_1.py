@@ -1,3 +1,4 @@
+#added clearer comment
 total = count = 0
 while True:
 	line = str(raw_input('>'))
