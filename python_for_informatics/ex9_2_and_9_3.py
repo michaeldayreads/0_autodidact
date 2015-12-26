@@ -2,7 +2,7 @@ def check_for_exit(command):
 	if command.lower() == 'quit()' or command.lower() == 'exit()':
 		exit()
 
-days = dict()
+emails = dict()
 error_check = 0
 while True:
 	filename = raw_input('Enter a filename: ')
@@ -20,9 +20,9 @@ for line in fhand:
 	words = line.split()
 	if len(words) < 3 or line.find('From ', 0) != 0 or line.count('@') != 1 : continue
 	error_check = error_check + 1
-	days[words[2]] = days.get(words[2],0) +1
+	emails[words[1]] = emails.get(words[1],0) +1 # same as 9.2, looks at email address rather than day of week
 
-print days
-error_check = error_check - sum(days.values())
+print emails
+error_check = error_check - sum(emails.values())
 print 'Lines that passeed the guardian logic in excess of total count:', error_check
 fhand.close()
