@@ -29,8 +29,11 @@ for email, count in emails.items():
 
 lst.sort(reverse=True)
 
-for count, email in lst[:1]:
-	print 'Person sending most email:', email, count
+for idx, tup in enumerate(lst):
+	count, email = tup
+	print count, email
+	n_count, n_email = lst[(idx +1)] # check for ties
+	if count > n_count: break
 
 error_check = error_check - sum(emails.values())
 if error_check > 0: print 'Lines that passeed the guardian logic in excess of total count:', error_check
