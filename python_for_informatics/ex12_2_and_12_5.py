@@ -32,6 +32,7 @@ while True:
 mysock.close()
 
 # headers if error
+# should meet criteria for exercise 12.5 - open to comments if you believe I am missing something
 header_end = alldata.find('\r\n\r\n') if (alldata.find('200 OK') > 0) else 0
 
 print 'Intersting length: ', len(alldata.strip()[header_end:])
