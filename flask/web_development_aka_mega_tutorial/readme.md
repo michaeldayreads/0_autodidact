@@ -1,4 +1,4 @@
-Completing this tutorial on pythonanywhere.com, and using pa.com with multiple branches inside the 
+If the code here differes from what Miguel Grinberg makes available on his site, in his book and from his github that is because I am completing this tutorial on pythonanywhere.com, and using pa.com with multiple branches inside the 
 {username}.pythonanywhere.com site so that its fast to switch between branches to see the small projects / ideas I am exploring.
 
 pa.com permits [virtualenv](https://help.pythonanywhere.com/pages/Virtualenvs)
