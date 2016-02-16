@@ -1,40 +1,45 @@
-class Point
+#!/usr/bin/ruby -w
+require 'singleton'
 
-	@n = 0
-	@totalX = 0
-	@totalY = 0
+class PointStats
+	include Singleton
+
+	def initialize
+		@n, @totalX, @totalY = 0, 0.0, 0.0
+	end
+
+	def record(point)
+		@n += 1
+		@totalX += point.x
+		@totalY += point.y
+	end
+
+	def report
+		puts "#{@n} -- points"
+		puts "#{@totalX/@n} -- Average x"
+		puts "#{@totalY/@n} -- Average y"		
+	end
+
+end
+
+class Point
+	attr_reader :x, :y
 
 	def initialize(x,y)
-		@x, @y = x, y
+		@x,@y = x,y
+		PointStats.instance.record(self)
 	end
 
-	def self.new(x,y)
-		@n +=1
-		@totalX += x
-		@totalY += y
-
-		super
-
+	def self.unrecorded(x,y)
+		instance = new(x,y)
 	end
 
-	def self.report
-		puts "#{@n} -- points"
-		puts "#{@totalX.to_f/@n} -- Average x"
-		puts "#{@totalY.to_f/@n} -- Average y"
-	end
-
-	class << self
-		attr_accessor :n, :totalX, :totalY
-	end
-
-	ORIGIN = Point.new(0,0)
-	UNIT_X = Point.new(1,0)
-	UNIT_Y = Point.new(0,1)
+	ORIGIN = Point.unrecorded(0,0)
+	UNIT_X = Point.unrecorded(1,0)
+	UNIT_Y = Point.unrecorded(0,1)
 
 	include Enumerable
 	include Comparable
-
-	attr_reader :x, :y
 
 	def to_s
 		"(#{@x},#{@y})"
@@ -108,40 +113,16 @@ class Point
 		Point.new(x,y)
 	end
 
-
 end
 
-#Struct.new("PointStruct", :x, :y)
-PointStruct = Struct.new(:x, :y)
+#demo :)
 
-class PointStruct
-	
-	#undef x=,y=,[]=
-
-	def add!(other)
-		self.x += other.x
-		self.y += other.y
-		self
-	end
-
-	include Comparable
-
-	def <=>(other)
-		return nil unless other.instance_of?(Point)
-		self.x**2 + self.y**2 <=> other.x**2 + other.y**2
-	end
-
-end
-
-first = Point.new(7,31)
-p first
+p first = Point.new(7,31)
 first.each {|x| p x}
-print first.show + "\n"
+print first.to_s + "\n"
 p second = Point.new(11,10)
-third = first + second
-p third
-fourth = -first
-p fourth
+p third = first + second
+p fourth = -first
 p first*3
 p 3*first
 p third.eql?(fourth)
@@ -149,7 +130,5 @@ p test = first.hash
 p first[1]
 p first < second
 p second < first
-p mp = PointStruct.new(8,8)
-p mp.add! first
 p total = Point.sum(first + second + third + fourth)
-Point.report
+PointStats.instance.report
