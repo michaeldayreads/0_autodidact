@@ -5,7 +5,7 @@ These are exercises, experiments, and entertainments produced in an effort to te
 _Compassionate comments, suggestions and feedback welcome - please find me on twitter_  
 <a href="https://twitter.com/michaeldayreads">@michaeldayreads</a>
 
-Looking for writings rather than code?? Please see 
+Looking for writings rather than code? Please see 
 See [the text repo](https://github.com/michaeldayreads/andoccasionallywrites)
 
 ### A note on licensing
@@ -22,4 +22,4 @@ I humbly and freely admit that what is posted is mostly so I can get feedback. I
 
 Thanks!
 
-- md
+-- md
