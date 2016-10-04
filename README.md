@@ -1,6 +1,6 @@
 ## A place for the code, distinct from the words.
 
-These are exercises, experiments, and entertainments produced in an effort to teach myself to code. 
+These are exercises, experiments, and entertainments produced in an effort to teach myself - slowly - to code. 
 
 _Compassionate comments, suggestions and feedback welcome - please find me on twitter_  
 <a href="https://twitter.com/michaeldayreads">@michaeldayreads</a>
