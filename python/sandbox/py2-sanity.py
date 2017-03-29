@@ -7,4 +7,7 @@ import time
 #print "test without"
 
 # print formatting tests
-print("a " + " b")
+# print("a " + " b")
+
+ready = raw_input("Press enter to continue test")
+print("...and on we go.") # with any typed input in "ready"
