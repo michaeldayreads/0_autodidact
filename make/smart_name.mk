@@ -12,6 +12,7 @@ bigip_oldver_2_img := bigip-osready-11.6.1.1.0.326
 bigip_ver := $(bigip_current_ver)
 ifeq ($(bigip_ver), $(bigip_current_ver))
 	bigip_params :=
+bigip_ver :=
 else ifeq ($(bigip_ver), $(bigip_oldver_1_ver))
 	bigip_params := --params $(bigip_testenv_name)/bigip_img:$(bigip_oldver_1_img)
 else ifeq ($(bigip_ver), $(bigip_oldver_2_ver))
@@ -21,11 +22,10 @@ else
 endif
 
 # use 'bigip' unless there are params
-default_bigip = bigip
 named_bigip = bigip:$(1)_bigip
 
 functest-install:
-	@echo --requires $(if $bigip_ver, \
+	@echo --requires $(if $(bigip_ver), \
 		$(call named_bigip,$(func_testenv_name)),bigip) $(bigip_params)
 
 functest-run:
