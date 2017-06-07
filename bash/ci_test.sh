@@ -12,3 +12,9 @@ else
         echo "[INFO]: Images will be pushed to https://hub.docker.com/u/$DOCKER_U/"
     fi
 fi
+
+if [ "$DOCKER_P" != "" -a "$DOCKER_U" != "" ]; then
+    echo "we should be able to push to docker..."
+else
+    echo "d'oh! logic busted!"
+fi
