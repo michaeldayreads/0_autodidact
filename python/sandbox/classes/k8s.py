@@ -23,7 +23,7 @@ class _ClusterRoleManager(object):
     # configs = {"_k8s": "foo", 
     #           "Openshift": "bar"}
 
-    def __init__(self, orchestration):
+    def __init__(self):
         self.orchestration = orchestration
         self.cluster
         self.cluster_role_config = {"foo": "bar"}
