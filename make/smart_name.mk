@@ -2,7 +2,7 @@
 
 func_module_name := my_func_$(orchestration)
 scale_module_name := my_scale_$(orchestration)
-ha_module_name := f5_mlb_ha_$(orchestration)
+ha_module_name := my_ha_$(orchestration)
 smoke_module_name := my_smoke_$(orchestration)
 
 stack_current_ver := v12.1.0
