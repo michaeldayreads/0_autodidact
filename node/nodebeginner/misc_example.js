@@ -7,3 +7,6 @@ function execute(someFunction, value) {
 }
 
 execute(say, "Well, yes, that is pretty damn cool");
+
+execute(function(word) { console.log(word)  }, "...this, too, is pretty damn cool."  );
+

@@ -1,4 +1,3 @@
-var http = require("http");
 
 // annonymous method
 /*
@@ -9,9 +8,12 @@ http.createServer( (request, response) => {
 }).listen(7777);
 */
 
+var http = require("http");
+var url = require("url");
+
 // named function method
 
-function start() {
+function start(route) {
 
   function cl(whatToLog){
     console.log(whatToLog)
@@ -19,6 +21,9 @@ function start() {
 
   function onRequest(request, response) {
     cl("Request received");
+    var pathname = url.parse(request.url).pathname;
+    cl("Request for " + pathname + " received.");
+    route(pathname);
     response.writeHead(200, {'Content-Type': 'text/plain'});
     response.write('Hello world: named function!');
     response.end();
