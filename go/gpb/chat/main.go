@@ -4,9 +4,11 @@ import (
 	"flag"
 	"log"
 	"net/http"
+	"os"
 	"path/filepath"
 	"sync"
 	"text/template"
+	"github.com/matryer/goblueprints/chapter1/trace"
 )
 
 // templ represents a single template.
@@ -28,6 +30,7 @@ func main() {
 	var addr = flag.String("addr", ":8080", "The addr of the application.")
 	flag.Parse() // parse the flags
 	r := newRoom()
+	r.tracer = trace.New(os.Stdout)
 	http.Handle("/", &templateHandler{filename: "chat.html"})
 	// get the room going
 	go r.run()
