@@ -1,0 +1,1 @@
+This directory contains small shell scripts that replicate bugs or improvements on more complex scripts seen elsewhere. Often modifying the full scripts for experimentation is too time costly, as scripts may orchestrate the creation or testing of large systems.
