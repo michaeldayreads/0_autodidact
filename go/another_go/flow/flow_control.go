@@ -36,11 +36,11 @@ func main() {
 // 	msg := ""
 // 	switch {
 // 	case t.Hour() < 12:
-// 		msg = "...mornin'..."
+// 		msg = "Morning."
 // 	case t.Hour() < 17:
 // 		msg = "Afternoon."
 // 	default:
-// 		msg = "Evn'n!"
+// 		msg = "Evening"
 // 	}
 // 	fmt.Println(msg)
 // }
