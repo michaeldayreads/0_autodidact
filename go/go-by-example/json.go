@@ -16,6 +16,7 @@ type response2 struct {
 	Things []string `json:"things-tagged"`
 }
 
+// typeof is a helper function that makes it possible to inspect the 'type' of the value passed to it.
 func typeof(v interface{}) string {
 	return fmt.Sprintf("%T", v)
 }
