@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"os"
 	"sync/atomic"
 	"time"
 )
@@ -32,6 +33,7 @@ func main() {
 	workChan := make(chan string)
 	healthChan := make(chan string)
 	metricChan := make(chan string)
+	done := make(chan struct{})
 
 	// This goroutine simulates doing the main task.
 	go func() {
@@ -63,6 +65,16 @@ func main() {
 		}
 	}()
 
+	// This goroutine waits for an interrupt.
+	// It could just as easily be a different kind of signal
+	// Using the blocking case below, responding to that signal is real time
+	//   but without consuming significant resources.
+	go func() {
+		fmt.Scanln()
+		log("..welp, looks like yer all done here. See ya!")
+		done <- struct{}{}
+	}()
+
 	for {
 		select {
 		case work := <-workChan:
@@ -73,9 +85,8 @@ func main() {
 		case metricsCheck := <-metricChan:
 			log(metricsCheck)
 			log(fmt.Sprintf("%d", metric))
-		default:
-			log("...well, lets not deadlock now okay?")
-			time.Sleep(1 * time.Second)
+		case <-done:
+			os.Exit(0)
 		}
 	}
 }
