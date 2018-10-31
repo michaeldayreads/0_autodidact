@@ -1,7 +1,4 @@
-// per the go proverb on dependency
-// this is a partial re-implementation from
-// https://github.com/cenkalti/backoff
-
+// this is a POC of a backoff timer implementation to simplify unit testing for events that unfold over seconds or minutes, allowing the unit tests to be completed in milliseconds.
 package main
 
 import (
@@ -62,7 +59,6 @@ func main() {
 		if err != nil {
 			fmt.Println("true backoff...")
 			time.Sleep(backoff(&actual))
-			// fmt.Printf("should have slept for %v seconds", actual.nextSleep)
 			continue
 		}
 		break
