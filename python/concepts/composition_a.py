@@ -61,10 +61,10 @@ class AWS_client(object):
 
 
     def scale_out(self, n):
-        print("AWS to scale out to {} backends".format(n))
+        print(("AWS to scale out to {} backends".format(n)))
 
     def scale_in(self, n):
-        print("AWS to scale in to {} backends".format(n))
+        print(("AWS to scale in to {} backends".format(n)))
 
 
 awc = AWC()
