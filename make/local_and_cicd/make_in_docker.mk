@@ -11,8 +11,38 @@
 # needs so that workflows are consistent across repos. Additionally, if we consistently use the same
 # targets, we can consolidate our files and use `include` more easily.
 #
+# Additionally, examples of variable override and recursive invocation are demonstrated.
 
-.PHONY : motivation
 
-motivation:
-	@head -13 make_in_docker.mk
+.PHONY : doc lint _lint_both _run_in_docker var_override
+
+THIS_FILE := $(lastword $(MAKEFILE_LIST))
+# this pattern from 
+# https://stackoverflow.com/questions/5377297/how-to-manually-call-another-target-from-a-make-target
+
+doc:
+	@head -15 make_in_docker.mk
+
+var_override:
+	@echo check
+	@echo $(CMD)
+	$(eval override CMD=bar)
+	@echo $(CMD)
+
+lint:
+	$(eval CMD=_lint_both)  # _$@_both also could be used
+	$(MAKE) -f $(THIS_FILE) _run_in_docker CMD=$(CMD)
+
+_lint_both:
+	# In CI/CD, invoke directly; `make _lint_both`
+	@echo do lint thing one
+	@echo do lint thing two
+	@echo do all the lint things!
+
+_run_in_docker:
+	docker run \
+	-it \
+	-v `pwd`:`pwd` \
+	-w `pwd` \
+	python:3.7-alpine \
+	sh scripts/bootstrap_container.sh $(THIS_FILE) $(CMD)
