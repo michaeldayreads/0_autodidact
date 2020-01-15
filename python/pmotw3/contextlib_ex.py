@@ -113,6 +113,67 @@ def func(msg):
 print() 
 func('Doing all the things after invoked as a _function_!')
 
+
+print('\n--- The context manager decorater ---')
+
+
+@contextlib.contextmanager
+def make_context():
+    print('  entering')
+    try:
+        yield {}  # TODO: This is not explained, research further.
+    except RuntimeError as err:
+        print('  ERROR:', err)
+    finally:
+        print('  exiting')
+
+print('Normal:')
+with make_context() as value:
+    print('  inside with statement:', value)
+
+print('\nHandled Error:')
+with make_context() as value:
+    raise RuntimeError('error example')
+
+@make_context()
+def compact_example(msg, err=None):
+    print(msg)
+    if err:
+        raise err
+    else:
+        print('Decorated, rather than invoked using `with`.')
+
+compact_example('Normal example.')
+
+compact_example('\nHandled Error', RuntimeError('This error was raised and handled ...'))
+
+print('\n--- Handle Demo ---\n')
+
+class Door:
+
+    def __init__(self):
+        print('  door.__init__')
+        self.open = True
+    
+    def close(self):
+        print('  door.close()')
+        self.open = False
+
+with contextlib.closing(Door()) as door:
+    print('  inside with; Is the door open? {}'.format(door.open))
+print('  After with; Is the door open? {}'.format(door.open))
+
+print('\nAnd if an error occurs...')
+try:
+    with contextlib.closing(Door()) as door:
+        print('  inside with; Is the door open? {}'.format(door.open))
+        raise ValueError('Ran into an error while the door was open.')
+except ValueError as err:
+    print('  Handled ERROR:', err)
+
+print('  After with; Is the door open? {}'.format(door.open))
+
+# Some housekeeping, to keep the GC from interleaving __exit__ calls...
 print('\n--- TIDY ---\n')
 for result in tidy:
     print(result)
