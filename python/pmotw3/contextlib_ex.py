@@ -173,6 +173,24 @@ except ValueError as err:
 
 print('  After with; Is the door open? {}'.format(door.open))
 
+print('--- Non Fatal Error ---')
+
+class LibraryError(Exception):
+    """Error raised by library that can be ignored (as example)."""
+    pass
+
+def code_using_library():
+    """In this imagined scenario, the error is intermittent and can always be ignored."""
+    raise LibraryError('The operation failed because of existing state.')
+
+with contextlib.suppress(LibraryError):
+    print('Attempting operation that, in this case, will raise the "intermittent" error.')
+    code_using_library()
+    print('Error suppressed. In reality, we almost certainly want to log this error?')
+
+print('Context completed.')
+
+
 # Some housekeeping, to keep the GC from interleaving __exit__ calls...
 print('\n--- TIDY ---\n')
 for result in tidy:
