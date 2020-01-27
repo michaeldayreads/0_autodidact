@@ -8,6 +8,7 @@ all:
 
 hello:
 	@echo hello world
+	env
 
 diskfree:; df -h /
 
