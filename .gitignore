@@ -2,3 +2,5 @@
 *.tmp
 tos.py
 *.swp
+*a.out
+
